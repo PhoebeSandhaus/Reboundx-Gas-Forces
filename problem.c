@@ -86,10 +86,7 @@ int main(int argc, char* argv[]){
         p.r = pow(3.*mass[i]/(4.*M_PI*density),1./3.); // calculate collision r
         p.lastcollision = 0;
         // assign planet number to each body
-        char planetNumber[20];
-        char string[20] = "planet";
-        itoa(i, planetNumber, 10);
-        p.hash = reb_hash(strcat(string, planetNumber));
+        p.hash = i;
         reb_add(sim, p);
     }
     
