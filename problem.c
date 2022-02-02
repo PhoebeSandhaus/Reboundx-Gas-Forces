@@ -71,6 +71,7 @@ int main(int argc, char* argv[]){
     struct reb_particle star = {0};
     star.m      = 1.;
     star.r      = 0.005;
+    star.hash   = reb_hash("CentralStar");
     reb_add(sim, star);
     
     // add planets
@@ -84,6 +85,11 @@ int main(int argc, char* argv[]){
         double density = 1.68372e6; // 1 g cm^-3 in Msun AU^-3
         p.r = pow(3.*mass[i]/(4.*M_PI*density),1./3.); // calculate collision r
         p.lastcollision = 0;
+        // assign planet number to each body
+        char planetNumber[20];
+        char string[20] = "planet";
+        itoa(i, planetNumber, 10);
+        p.hash = reb_hash(strcat(string, planetNumber));
         reb_add(sim, p);
     }
     
