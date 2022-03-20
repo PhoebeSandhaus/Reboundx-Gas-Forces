@@ -119,12 +119,12 @@ int main(int argc, char* argv[]){
     } 
     else {
         printf("Restarting integration...");
-        sim = reb_create_simulation_from_binary("reb.bin");
-        rebx = rebx_create_extras_from_binary(sim, "rebx.bin");
+        struct reb_simulation* sim = reb_create_simulation_from_binary("reb.bin");
+        struct reb_extras* rebx = rebx_create_extras_from_binary(sim, "rebx.bin");
 
         reb_move_to_com(sim);
 
-        gd = rebx_get_force(rebx, "gd");
+        struct rebx_force* gd = rebx_get_force(rebx, "gd");
 
         for (int i = 0; i < sim->N; i++){
             rebx_get_param(rebx, &sim->particles[i+1].ap, "damp_coeff", 100.); // damping coefficient set to 100
