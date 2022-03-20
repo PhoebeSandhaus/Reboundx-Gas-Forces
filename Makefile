@@ -1,5 +1,5 @@
 ifndef REB_DIR
-	
+
 ifneq ($(wildcard ../../rebound/.*),) # Check for REBOUND in default location
 REB_DIR=../../rebound
 endif
@@ -45,7 +45,7 @@ libreboundx.so: $(OBJECTS)
 	$(CC) $(OPT) -shared $(OBJECTS) $(LIB) -lrebound -L$(REB_DIR)/src -o $@ 
 	@echo ""        
 	@echo "The shared library $@ has been created successfully."
-	
+
 clean:
 	@echo "Cleaning up shared library librebound.so ..."
 	@-rm -f librebound.so
@@ -53,4 +53,4 @@ clean:
 	@echo "Cleaning up shared library libreboundx.so ..."
 	@-rm -f libreboundx.so
 	@-rm -f *.o
-	
+
