@@ -20,11 +20,24 @@ double tmax;
 
 int main(int argc, char* argv[]){
 
-    FILE* initialFile = fopen("initialPlanetProperties_SolarSystem.txt", "r");
+    // check if the problem.c file is starting within Huang2017 or SolarSystem
+    // then change initial filename based on which
+    char path[200];
+    getcwd(path, 200);
+    char *giantPlanetConfig;
+    char* filename = "default.txt";
+    giantPlanetConfig = strstr(path, "SolarSystem"); 
+
+    if (giantPlanetConfig) {
+        filename = "initialPlanetProperties_SolarSystem.txt";
+    }
+    else {
+        filename = "initialPlanetProperties_Huang2017.txt";
+    }    
 
     // check if existing instances of simulation exist
     // then restart simulation using the current_orbits.txt file
-    
+    FILE* initialFile = fopen(filename, "r");
     FILE* currentOrbits = fopen("current_orbits.txt", "r");
     if (currentOrbits == NULL) {
         
