@@ -72,10 +72,16 @@ int main(int argc, char* argv[]){
 
         /* start the rebound simulation here */
         struct reb_simulation* sim = reb_create_simulation();
-        sim->integrator = REB_INTEGRATOR_MERCURIUS;
+        
+        if (!strcmp(filename, "initialPlanetProperties_Huang2017.txt")) {
+            sim->integrator = REB_INTEGRATOR_IAS15;  // Use the same integrator as Huang 2017
+        }
+        else {
+            sim->integrator = REB_INTEGRATOR_MERCURIUS;
+        }
         sim->ri_mercurius.hillfac = 3;
         sim->dt = 0.00137*2.*M_PI;
-        //sim->integrator = REB_INTEGRATOR_IAS15;
+        
         
         sim->collision            = REB_COLLISION_DIRECT;
         sim->collision_resolve    = reb_collision_resolve_merge;       // Choose merger collision routine.
@@ -166,11 +172,17 @@ int main(int argc, char* argv[]){
 
         /* start the rebound simulation here */
         struct reb_simulation* sim = reb_create_simulation();
-        sim->integrator = REB_INTEGRATOR_MERCURIUS;
+        
+        if (!strcmp(filename, "initialPlanetProperties_Huang2017.txt")) {
+            sim->integrator = REB_INTEGRATOR_IAS15;  // Use the same integrator as Huang 2017
+        }
+        else {
+            sim->integrator = REB_INTEGRATOR_MERCURIUS;
+        }
+        
         sim->ri_mercurius.hillfac = 3;
         sim->dt = 0.00137*2.*M_PI;
         sim->t = t[0];
-        //sim->integrator = REB_INTEGRATOR_IAS15;
         
         sim->collision            = REB_COLLISION_DIRECT;
         sim->collision_resolve    = reb_collision_resolve_merge;       // Choose merger collision routine.
