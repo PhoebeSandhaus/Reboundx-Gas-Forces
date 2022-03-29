@@ -75,7 +75,7 @@ static struct reb_vec3d rebx_calculate_gas_damping_forces(struct reb_simulation*
     struct rebx_extras* const rebx = sim->extras;
     struct reb_orbit o = reb_tools_particle_to_orbit(sim->G, *planet, *star);
 
-    const double* const damp_coeff = rebx_get_param(rebx, planet->ap, "damp_coeff");
+    const double* const gdf_damp_coeff = rebx_get_param(rebx, planet->ap, "gdf_damp_coeff");
 
     // initialize damping timescales
     double tau_a = INFINITY;
@@ -116,7 +116,7 @@ static struct reb_vec3d rebx_calculate_gas_damping_forces(struct reb_simulation*
         }
     }
 
-    double tau_e = -0.003*(*damp_coeff)*pow(a0, 2.)*(starMass/planetMass)*2.*M_PI*coeff;
+    double tau_e = -0.003*(*gdf_damp_coeff)*pow(a0, 2.)*(starMass/planetMass)*2.*M_PI*coeff;
     double tau_inc = tau_e/2.;
 
     struct reb_vec3d a = {0};
