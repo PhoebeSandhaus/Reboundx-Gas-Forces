@@ -212,7 +212,8 @@ void reb_output_orbits(struct reb_simulation* r, char* filename){
     struct reb_particle com = r->particles[0];
     for (int i=1;i<N;i++){
         struct reb_orbit o = reb_tools_particle_to_orbit(r->G, r->particles[i],com);
-        fprintf(of,"%e\t%e\t%e\t%e\t%e\t%e\t%e\t%e\t%e\n",r->t,o.a,o.e,o.inc,o.Omega,o.omega,o.l,o.P,o.f);
+	    struct reb_particle p = r->particles[i];
+        fprintf(of,"%e\t%e\t%e\t%e\t%e\t%e\t%e\t%e\t%e\t%e\t%d\n",r->t,o.a,o.e,o.inc,o.Omega,o.omega,o.l,o.P,o.f,p.m,p.hash);
         com = reb_get_com_of_pair(com,r->particles[i]);
     }
     fclose(of);
@@ -362,13 +363,6 @@ void reb_output_binary_to_stream(struct reb_simulation* r, char** bufp, size_t* 
     WRITE_FIELD(EOS_SAFEMODE,       &r->ri_eos.safe_mode,               sizeof(unsigned int));
     WRITE_FIELD(EOS_ISSYNCHRON,     &r->ri_eos.is_synchronized,         sizeof(unsigned int));
     WRITE_FIELD(RAND_SEED,          &r->rand_seed,                      sizeof(unsigned int));
-    WRITE_FIELD(BS_EPSABS,          &r->ri_bs.eps_abs,                  sizeof(double));
-    WRITE_FIELD(BS_EPSREL,          &r->ri_bs.eps_rel,                  sizeof(double));
-    WRITE_FIELD(BS_MINDT,           &r->ri_bs.min_dt,                   sizeof(double));
-    WRITE_FIELD(BS_MAXDT,           &r->ri_bs.max_dt,                   sizeof(double));
-    WRITE_FIELD(BS_FIRSTORLASTSTEP, &r->ri_bs.firstOrLastStep,          sizeof(int));
-    WRITE_FIELD(BS_PREVIOUSREJECTED,&r->ri_bs.previousRejected,         sizeof(int));
-    WRITE_FIELD(BS_TARGETITER,      &r->ri_bs.targetIter,               sizeof(int));
     int functionpointersused = 0;
     if (r->coefficient_of_restitution ||
         r->collision_resolve ||
