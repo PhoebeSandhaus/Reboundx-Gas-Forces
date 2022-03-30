@@ -214,7 +214,7 @@ int main(int argc, char* argv[]){
         rebx_add_force(rebx, gd);
 
         for (int i = 0; i < sim->N; i++){
-            rebx_set_param_double(rebx, &sim->particles[i+1].ap, "damp_coeff", 100.); // damping coefficient set to 100
+            rebx_set_param_double(rebx, &sim->particles[i+1].ap, "gdf_damp_coeff", 100.); // damping coefficient set to 100
         }
 
         tmax = 1.e6*2*M_PI;
