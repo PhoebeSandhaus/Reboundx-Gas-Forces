@@ -73,12 +73,7 @@ int main(int argc, char* argv[]){
         /* start the rebound simulation here */
         struct reb_simulation* sim = reb_create_simulation();
         
-        if (!strcmp(filename, "initialPlanetProperties_Huang2017.txt")) {
-            sim->integrator = REB_INTEGRATOR_IAS15;  // Use the same integrator as Huang 2017
-        }
-        else {
-            sim->integrator = REB_INTEGRATOR_MERCURIUS;
-        }
+        sim->integrator = REB_INTEGRATOR_MERCURIUS;  // both configurations will now use Mercurius; Huang 2017 didn't have Mercurius as an option
         sim->ri_mercurius.hillfac = 3;
         sim->dt = 0.00137*2.*M_PI;
         
@@ -173,13 +168,7 @@ int main(int argc, char* argv[]){
         /* start the rebound simulation here */
         struct reb_simulation* sim = reb_create_simulation();
         
-        if (!strcmp(filename, "initialPlanetProperties_Huang2017.txt")) {
-            sim->integrator = REB_INTEGRATOR_IAS15;  // Use the same integrator as Huang 2017
-        }
-        else {
-            sim->integrator = REB_INTEGRATOR_MERCURIUS;
-        }
-
+         sim->integrator = REB_INTEGRATOR_MERCURIUS;  // both configurations will now use Mercurius; Huang 2017 didn't have Mercurius as an option
         sim->ri_mercurius.hillfac = 3;
         sim->dt = 0.00137*2.*M_PI;
         sim->t = t[0];
