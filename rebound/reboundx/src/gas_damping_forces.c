@@ -121,7 +121,7 @@ static struct reb_vec3d rebx_calculate_gas_damping_forces(struct reb_simulation*
 
     struct reb_vec3d a = {0};
 
-    a.x =  dvx*invtau_a/(2.;
+    a.x =  dvx*invtau_a/(2.);
     a.y =  dvy*invtau_a/(2.);
     a.z =  dvz*invtau_a/(2.);
 
