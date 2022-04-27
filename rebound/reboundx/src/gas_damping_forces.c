@@ -78,7 +78,7 @@ static struct reb_vec3d rebx_calculate_gas_damping_forces(struct reb_simulation*
     const double* const gdf_damp_coeff = rebx_get_param(rebx, planet->ap, "gdf_damp_coeff");
 
     // initialize damping timescales
-    double tau_a = INFINITY;
+    double invtau_a = 0.0;
 
     // initialize positions and velocities
     const double dvx = planet->vx - star->vx;
@@ -121,9 +121,9 @@ static struct reb_vec3d rebx_calculate_gas_damping_forces(struct reb_simulation*
 
     struct reb_vec3d a = {0};
 
-    a.x =  dvx/(2.*tau_a);
-    a.y =  dvy/(2.*tau_a);
-    a.z =  dvz/(2.*tau_a);
+    a.x =  dvx*invtau_a/(2.;
+    a.y =  dvy*invtau_a/(2.);
+    a.z =  dvz*invtau_a/(2.);
 
     if (tau_e < INFINITY || tau_inc < INFINITY){
         const double vdotr = dx*dvx + dy*dvy + dz*dvz;
